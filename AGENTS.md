@@ -22,3 +22,18 @@ Note: other repositories may prefer `git_unleash.git_branch_create_and_switch` i
 The Git and GitHub operations for the steps above must be performed using the `git_unleash` MCP.
 
 For GitHub issue conventions in this repository, see [docs/github-issues.md](./docs/github-issues.md).
+
+## Agent skills
+
+### Issue tracker
+
+Issues and specs live in GitHub Issues for `dmilinevskyi/codex-git-unleash-mcp`.
+See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Use the five default triage labels. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Use a single-context layout. See `docs/agents/domain.md`.
