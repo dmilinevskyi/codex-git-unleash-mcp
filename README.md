@@ -12,6 +12,8 @@ See OpenAI Codex docs: [Protected paths in writable roots](https://developers.op
 
 For the suggested repository workflow used in this repo (and in general), see [AGENTS.md](./AGENTS.md).
 
+See [GLOSSARY.md](./GLOSSARY.md) for the policy terminology used in this project.
+
 Current tool surface:
 
 - `config_bootstrap`
@@ -377,12 +379,12 @@ This keeps the tools constrained while still working across repositories that us
 
 ## Example Config For This Repo
 
-If you want to branch from `main` but only allow mutations on personal feature branches:
+If `main` is the detected base branch and you want to allow branch-gated mutations on personal feature branches:
 
 ```yaml
 defaults:
   allowed_branch_patterns:
-    - "^main$"
+    - "^<user>/.*$"
   feature_branch_pattern: "<user>/<feature-name>"
   workflow_mode: worktree
   allowed_workflow_modes:
@@ -394,12 +396,17 @@ repositories:
   - path: ~/projects/codex-git-unleash-mcp-enterprise
     allowed_branch_patterns:
       - "^feature/[a-z0-9._-]+$"
+    feature_branch_pattern: "feature/<feature-name>"
     workflow_mode: feature_branch
     allowed_workflow_modes:
       - feature_branch
 ```
 
 In that example, `workflow_mode` tells agents to start with the `worktree` setup flow by default, while `allowed_workflow_modes` keeps both `worktree` and `feature_branch` available when the caller needs either one.
+
+The first repository inherits the personal branch rule and naming template. The enterprise repository overrides both
+with the `feature/` convention. Naming templates are advisory; allowed branch patterns enforce permission.
+These settings do not select the base branch or override a repo-local policy base.
 
 If you want some repositories to stay on their base branch instead of creating a worktree or feature branch:
 
